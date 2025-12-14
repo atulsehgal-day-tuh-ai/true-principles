@@ -320,7 +320,7 @@ export default function Home() {
 
             <header className="header">
                 <div className="container">
-                    <div className="logo">True Principles</div>
+                    <div className="logo">Same Thing Only Different</div>
                     <nav className="nav">
                         <a href="#how-it-works">How It Works</a>
                         <a href="#featured">Principles</a>
@@ -444,15 +444,13 @@ export default function Home() {
 
             <div className="quote-banner">
                 {quotes.map((quote, index) => (
-                    <div key={index} className={`quote-slide ${index === quoteIndex ? 'active' : ''}`}>
-                        <p>{quote}</p>
-                    </div>
+                    <div key={index} className={`quote-slide ${index === quoteIndex ? 'active' : ''}`}>{quote}</div>
                 ))}
             </div>
 
             <footer className="footer">
                 <div className="container">
-                    <p>&copy; 2023 True Principles. All Rights Reserved.</p>
+                    <p>&copy; 2023 Same Thing Only Different. All Rights Reserved.</p>
                 </div>
             </footer>
         </>
