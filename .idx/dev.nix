@@ -1,54 +1,75 @@
 # To learn more about how to use Nix to configure your environment
-# see: https://firebase.google.com/docs/studio/customize-workspace
+# see: https://developers.google.com/idx/guides/customize-idx-env
 { pkgs, ... }: {
-  # Which nixpkgs channel to use.
-  channel = "stable-24.05"; # or "unstable"
-
-  # Use https://search.nixos.org/packages to find packages
+  
+  # 1. Channels & Packages
+  channel = "stable-23.11"; 
   packages = [
-    # pkgs.go
-    # pkgs.python311
-    # pkgs.python311Packages.pip
-    # pkgs.nodejs_20
-    # pkgs.nodePackages.nodemon
+    pkgs.nodejs_20
+    pkgs.python311
+    pkgs.python311Packages.pip
+    # Add other packages here if needed
   ];
 
-  # Sets environment variables in the workspace
-  env = {};
+  # 2. Enable Docker (ADD THIS HERE)
+  services.docker.enable = true;
+
+  # 3. IDX Specific Config
   idx = {
-    # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
+    
+    # Extensions
     extensions = [
-      # "vscodevim.vim"
+      # "supabase.supabase-vscode" 
     ];
 
-    # Enable previews
+    # Previews (Must be inside 'idx')
     previews = {
       enable = true;
       previews = {
-        # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
-        #   # and show it in IDX's web preview panel
-        #   command = ["npm" "run" "dev"];
-        #   manager = "web";
-        #   env = {
-        #     # Environment variables to set for your server
-        #     PORT = "$PORT";
-        #   };
-        # };
+        web = {
+          command = [
+            "npm"
+            "run"
+            "dev"
+            "--prefix"
+            "frontend"
+            "--"
+            "--port"
+            "$PORT"
+            "--hostname"
+            "0.0.0.0"
+          ];
+          manager = "web";
+        };
+        api = {
+          command = [
+            "pip"
+            "install"
+            "-r"
+            "api/requirements.txt"
+            "&&"
+            "uvicorn"
+            "api.main:app"
+            "--host"
+            "0.0.0.0"
+            "--port"
+            "$PORT"
+          ];
+          manager = "web";
+        };
       };
     };
-
-    # Workspace lifecycle hooks
+    
+    # Workspace Lifecycle Hooks
     workspace = {
-      # Runs when a workspace is first created
+      # Runs when you create a workspace
       onCreate = {
-        # Example: install JS dependencies from NPM
-        # npm-install = "npm install";
+        npm-install = "npm install --prefix frontend";
+        pip-install = "pip install -r api/requirements.txt";
       };
-      # Runs when the workspace is (re)started
+      # Runs every time you start the workspace
       onStart = {
-        # Example: start a background task to watch and re-build backend code
-        # watch-backend = "npm run watch-backend";
+        # You can add start commands here
       };
     };
   };

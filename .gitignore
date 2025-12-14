@@ -1,0 +1,28 @@
+# IDE and OS specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idx/
+.DS_Store
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Node specific
+node_modules/
+.next/
+out/
+npm-debug.log
+yarn-error.log
+
+# Supabase specific
+*.secret
+signing_keys.json
+
+# Celery specific
+celerybeat-schedule
