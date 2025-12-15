@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
@@ -311,7 +312,7 @@ export default function Home() {
             <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100vw', height: '100vh', zIndex: -1 }}>
                 <Image
                     alt="Background Image"
-                    src="/index.png"
+                    src="/tree.png"
                     layout="fill"
                     objectFit="cover"
                     quality={100}
@@ -325,8 +326,8 @@ export default function Home() {
                         <a href="#how-it-works">How It Works</a>
                         <a href="#featured">Principles</a>
                         <a href="#contribute">Contribute</a>
-                        <a href="#">Login</a>
-                        <a href="#" className="cta-button">Sign Up</a>
+                        <a href="/login">Login</a>
+                        <a href="/signup" className="cta-button">Sign Up</a>
                     </nav>
                 </div>
             </header>
@@ -438,7 +439,7 @@ export default function Home() {
                     <h2>Become an Architect of Truth</h2>
                     <p>Don't just consume; synthesize. Submit new principles, refine definitions, or provide evidence.</p>
                     <br />
-                    <a href="#" className="neon-glass-btn">Apply to be an Architect</a>
+                    <a href="/signup" className="neon-glass-btn">Apply to be an Architect</a>
                 </div>
             </section>
 
